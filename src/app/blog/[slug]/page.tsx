@@ -4,6 +4,14 @@ import { Post } from '~/types';
 import store from '~/store';
 import { IP } from '~/utils';
 
+export async function generateStaticParams() {
+  const posts: Post[] = await fetch(
+    'https://jsonplaceholder.typicode.com/posts',
+  ).then(res => res.json());
+
+  return posts.map(post => ({ slug: post.id }));
+}
+
 const getPost = async (slug: string) => {
   const res = await fetch(
     `https://jsonplaceholder.typicode.com/posts/${slug}`,
