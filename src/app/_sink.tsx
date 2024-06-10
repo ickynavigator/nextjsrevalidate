@@ -1,7 +1,6 @@
 'use client';
-import { useDebounce, useSessionStorage } from '@uidotdev/usehooks';
-
-import { useEffect, useRef, useState } from 'react';
+import { useSessionStorage } from 'usehooks-ts';
+import { useRef, useState } from 'react';
 import { TAGS } from '~/constant';
 import store from '~/store';
 import {
@@ -245,17 +244,11 @@ function Tools() {
 }
 
 function Delay() {
-  const [fetchDelay, setCount] = useSessionStorage(
+  const [fetchDelay, setFetchDelay] = useSessionStorage(
     store.sink.KEYS.fetchDelay,
     0,
   );
-  const [fakeFetchDelay, setFakeFetchDelay] = useState(fetchDelay);
-  const debouncedFetchDelay = useDebounce(fakeFetchDelay, 300);
 
-  useEffect(() => {
-    setCount(debouncedFetchDelay);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [debouncedFetchDelay]);
   return (
     <>
       <div className="border rounded w-full p-4 flex flex-col gap-4">
@@ -264,7 +257,7 @@ function Delay() {
             htmlFor="fetchDelay"
             className="block text-sm font-medium text-gray-700 dark:text-gray-200"
           >
-            Current Simulated Delay: {fakeFetchDelay}ms
+            Current Simulated Delay: {fetchDelay}ms
           </label>
           <input
             type="range"
@@ -273,15 +266,15 @@ function Delay() {
             className="w-full h-2 bg-white-200 rounded-lg appearance-none cursor-pointer dark:bg-white-700"
             min={0}
             max={5000}
-            value={fakeFetchDelay}
-            onChange={e => setFakeFetchDelay(Number(e.target.value))}
+            value={fetchDelay}
+            onChange={e => setFetchDelay(Number(e.target.value))}
           />
         </div>
 
         <div className="flex flex-wrap gap-2 [&>*]:grow [&>*]:basis-0 [&>*]:shrink">
-          <Button onClick={() => setFakeFetchDelay(0)}>No Delay</Button>
-          <Button onClick={() => setFakeFetchDelay(2_500)}>2500</Button>
-          <Button onClick={() => setFakeFetchDelay(5_000)}>5000</Button>
+          <Button onClick={() => setFetchDelay(0)}>No Delay</Button>
+          <Button onClick={() => setFetchDelay(2_500)}>2500</Button>
+          <Button onClick={() => setFetchDelay(5_000)}>5000</Button>
         </div>
       </div>
     </>
