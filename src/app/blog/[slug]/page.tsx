@@ -9,7 +9,7 @@ export async function generateStaticParams() {
     'https://jsonplaceholder.typicode.com/posts',
   ).then(res => res.json());
 
-  return posts.map(post => ({ slug: post.id }));
+  return posts.map(post => ({ slug: `${post.id}` }));
 }
 
 const getPost = async (slug: string) => {
