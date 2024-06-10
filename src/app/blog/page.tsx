@@ -3,7 +3,7 @@ import { TAGS } from '~/constant';
 import { Post } from '~/types';
 import store from '~/store';
 
-export const getPostList = async () => {
+const getPostList = async () => {
   const res = await fetch('https://jsonplaceholder.typicode.com/posts', {
     next: {
       tags: [TAGS.BLOG_LIST],
