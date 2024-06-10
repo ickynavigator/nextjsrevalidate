@@ -54,7 +54,6 @@ export default async function Page() {
 function ArrowIcon() {
   return (
     <svg
-      // show on hover
       className="w-4 h-4 ms-2 rtl:rotate-180 transform transition-all duration-500 opacity-0 group-hover:opacity-100 group-hover:rtl:rotate-0 group-hover:rotate-180"
       aria-hidden="true"
       xmlns="http://www.w3.org/2000/svg"
